@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.name        = "color_guard"
   s.version     = ColorGuard::VERSION
   s.authors     = ["Ryan Burrows"]
-  s.email       = ["rhburrows@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ColorGuard."
-  s.description = "TODO: Description of ColorGuard."
+  s.email       = ["ryan@mazlo.me"]
+  s.homepage    = "https://github.com/Quve/color_guard'"
+  s.summary     = "Feature flags and more!"
+  s.description = "ColorGuard is a library providing feature flags to rails applications"
 
   s.files = Dir["{app,config,db,lib}/**/*", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]

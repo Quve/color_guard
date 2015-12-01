@@ -1,5 +1,3 @@
-Rails.application.routes.draw do
-  namespace :color_guard do
-    root to: 'features#index'
-  end
+ColorGuard::Engine.routes.draw do
+  root to: 'color_guard/features#index'
 end
