@@ -1,0 +1,12 @@
+<h1><% link_to "Color Guard", color_guard_engine_path %></h1>
+
+<% if feature_active?(:bill_murray) %>
+  <img src="http://www.fillmurray.com/g/200/400" alt="bill">
+<% end %>
+
+<% if feature_active?(:unicorns) %>
+  <marquee behavior="scroll" direction="right">
+    <%= image_tag "unicorn.gif" %>
+  </marquee>
+  <% end %>
+  

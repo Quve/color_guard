@@ -3,6 +3,7 @@ PATH
   specs:
     color_guard (0.0.1)
       rails (~> 4.2)
+      rollout (~> 2.1)
 
 GEM
   remote: https://rubygems.org/
@@ -91,6 +92,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    rollout (2.1.0)
     rspec-core (3.4.1)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
