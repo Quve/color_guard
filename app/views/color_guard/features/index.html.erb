@@ -1,0 +1,23 @@
+<h1 class="text-center">Color Guard</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Feature Name</th>
+      <th>Active %</th>
+      <th>Active Groups</th>
+      <th>Active Users</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @features.each do |feature| %>
+    <tr>
+      <td><%= feature.name %></td>
+      <td><%= feature.percentage %></td>
+      <td><%= feature.groups.join(',') %></td>
+      <td><%= feature.users.join(',') %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
