@@ -9,6 +9,10 @@ module ColorGuard
              :deactivate_user, :activate_percentage, :deactivate_percentage, :deactivate, :activate,
              to: :rollout
 
+    def features
+      rollout.features.map{ |f| ColorGuard::Feature.new(rollout.get(f)) }
+    end
+
     private
 
     # For now we are just providing a thin wrapper around rollout. The point of this

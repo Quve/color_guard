@@ -55,4 +55,21 @@ RSpec.describe ColorGuard do
     expect(rollout).to receive(:activate).with(:feature)
     subject.activate(:feature)
   end
+
+  describe "#features" do
+    context "for each feature in rollout" do
+      before do
+        allow(rollout).to receive(:features).and_return([:one, :two, :three])
+        allow(rollout).to receive(:get){ |name| stub_rollout_feature(name) }
+      end
+
+      it "loads the rollout feature and wraps it in a color guard feature" do
+        expect(subject.features.map{ |f| f.name }).to eq([:one, :two, :three])
+      end
+    end
+  end
+
+  def stub_rollout_feature(name)
+    double("Rollout Feature: #{name}", name: name, percentage: 27, users: [], groups: [])
+  end
 end
