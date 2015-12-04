@@ -20,7 +20,7 @@ module ColorGuard
     def rollout
       $rollout ||= begin
         raise "ColorGuard.store must be set" if store.nil?
-        Rollout.new(store)
+        Rollout.new(store, randomize_percentage: true)
       end
     end
   end
