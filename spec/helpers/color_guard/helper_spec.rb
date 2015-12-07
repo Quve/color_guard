@@ -13,5 +13,18 @@ RSpec.describe ColorGuard::Helper do
       allow(ColorGuard).to receive(:active?).and_return(false)
       expect(subject.feature_active?(:anything_else, 97)).to eq(false)
     end
+
+    context "if #current_user is a defined method" do
+      before do
+        def subject.current_user
+          13317
+        end
+      end
+
+      it "passes the current user to ColorGuard#active?" do
+        expect(ColorGuard).to receive(:active?).with(:feature, 13317)
+        subject.feature_active?(:feature)
+      end
+    end
   end
 end
