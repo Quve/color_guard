@@ -6,9 +6,19 @@ RSpec.describe ColorGuard do
   before { allow(ColorGuard).to receive(:rollout).and_return(rollout) }
   after  { allow(ColorGuard).to receive(:rollout).and_call_original }
 
-  it "delegates '#active?' to the rollout backend" do
+  it "delegates '#active?' to the rollout backend if all_features_enabled? is false" do
     expect(rollout).to receive(:active?).with(:feature)
     subject.active?(:feature)
+  end
+
+  it "does not delegate '#active?' to the rollout backend if all_features_enabled? is true" do
+    expect(rollout).to receive(:active?).with(:feature)
+    subject.active?(:feature)
+  end
+
+  it "returns true if all features are enabled" do
+    allow(ColorGuard).to receive(:rollout).and_return(ColorGuard::NullRollout.new)
+    expect(subject.active?(:feature)).to eq(true)
   end
 
   it "delegates '#activate_group' to the rollout backend" do
@@ -66,6 +76,18 @@ RSpec.describe ColorGuard do
       it "loads the rollout feature and wraps it in a color guard feature" do
         expect(subject.features.map{ |f| f.name }).to eq([:one, :two, :three])
       end
+    end
+  end
+
+  describe "#all_features_enabled?" do
+    it "returns true if the 'COLOR_GUARD_ENABLE_ALL' environment variable is set" do
+      ENV['COLOR_GUARD_ENABLE_ALL'] = "true"
+      expect(subject.all_features_enabled?).to eq(true)
+    end
+
+    it "returns false if the 'COLOR_GUARD_ENABLE_ALL' environment variable is not set" do
+      ENV['COLOR_GUARD_ENABLE_ALL'] = nil
+      expect(subject.all_features_enabled?).to eq(false)
     end
   end
 
