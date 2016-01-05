@@ -11,7 +11,7 @@ module ColorGuard
 
     autoload :Cookie, "color_guard/store/cookie"
     autoload :Noop, "color_guard/store/noop"
-    # autoload :Stack, "color_guard/store/stack"
+    autoload :Stack, "color_guard/store/stack"
     autoload :UrlParameter, "color_guard/store/url_parameter"
   end
 end
