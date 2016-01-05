@@ -26,6 +26,11 @@ app = Proc.new do |env|
     [ build_page_body ]
   ]
 end
+
+ColorGuard.configure do |config|
+  config.store = [ :redis, { pool_timeout: 5, namespace: :color_guard } ]
+end
+
 app = ColorGuard::Middleware.new(app, allow_cookies: true, allow_url: true)
 
 Rack::Handler::WEBrick.run app

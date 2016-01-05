@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     color_guard (0.0.1)
+      connection_pool
+      redis
 
 GEM
   remote: https://rubygems.org/
@@ -28,6 +30,7 @@ GEM
     builder (3.2.2)
     cane (2.6.2)
       parallel
+    connection_pool (2.2.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
@@ -57,6 +60,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    redis (3.2.2)
     rspec-core (3.4.1)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)

@@ -16,6 +16,9 @@ Gem::Specification.new do |s|
   s.files = Dir["lib/**/*", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
 
+  s.add_dependency "redis"
+  s.add_dependency "connection_pool"
+
   s.add_development_dependency "cane"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "simplecov"
