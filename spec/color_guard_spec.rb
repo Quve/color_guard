@@ -6,6 +6,7 @@ RSpec.describe ColorGuard do
   let(:store) { double(ColorGuard::Store, find: feature) }
 
   before{ ColorGuard.configuration = current_config }
+  after { ColorGuard.configuration = nil }
 
   describe ".configuration" do
     it "creates a configuration if there isn't one" do
