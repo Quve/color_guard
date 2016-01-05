@@ -1,6 +1,8 @@
 module ColorGuard
   module Store
     class Stack
+      attr_reader :stores
+
       def initialize(config = {})
         @stores = []
         @cache = {}
