@@ -24,19 +24,19 @@ module ColorGuard
       if with_params? || with_cookies?
         store = Store::Stack.new
         store.push(Store.build(ColorGuard.configuration))
-        store.push(Store::Cookie.new(request.cookies)) if config[:allow_cookies]
-        store.push(Store::UrlParameter.new(request.query_string)) if config[:allow_url]
+        store.push(Store::Cookie.new(request.cookies)) if with_cookies?
+        store.push(Store::UrlParameter.new(request.query_string)) if with_params?
         store
       else
         Store.build(ColorGuard.configuration)
       end
     end
 
-    def with_params?
+    def with_cookies?
       !!config[:allow_cookies]
     end
 
-    def with_cookies?
+    def with_params?
       !!config[:allow_url]
     end
   end
