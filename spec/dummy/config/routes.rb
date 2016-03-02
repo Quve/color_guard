@@ -1,5 +1,0 @@
-Rails.application.routes.draw do
-  root to: 'application#index'
-
-  mount ColorGuard::Engine, at: "/color_guard"
-end

@@ -1,13 +1,7 @@
-ENV["RAILS_ENV"] ||= "test"
 require "simplecov"
-SimpleCov.start("rails")
-
-require_relative "dummy/config/environment.rb"
-require "rspec/rails"
+SimpleCov.start
 
 RSpec.configure do |config|
-  config.use_transactional_fixtures = true
-
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
