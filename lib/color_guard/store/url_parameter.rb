@@ -13,6 +13,10 @@ module ColorGuard
         false
       end
 
+      def all
+        @values
+      end
+
       private
 
       def read_values(query_string)

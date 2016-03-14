@@ -19,6 +19,10 @@ module ColorGuard
         end
       end
 
+      def all
+        @stores.map { |store| store.all }
+      end
+
       # Attempts to write to each store in the stack until one of the writes is successful
       def write!(feature)
         # Remove any cached version of the feature but don't repopulate the cache in case

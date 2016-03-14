@@ -1,8 +1,14 @@
 require "color_guard"
 require "rack"
+require "erb"
 
 module ColorGuard
   class Middleware
+    ALL_FEATURES_BODY = <<-EOS
+      <p><%= @all_features %></p>
+      <h3>Hello?</h3>
+    EOS
+
     attr_reader :config
 
     def initialize(app, config = {})
@@ -11,14 +17,26 @@ module ColorGuard
     end
 
     def call(env)
-      Thread.current[:color_guard_store] = store(Rack::Request.new(env))
-      response = @app.call(env)
-      Thread.current[:color_guard_store] = nil
+      @req = Rack::Request.new(env)
+      Thread.current[:color_guard_store] = store(@req)
 
-      response
+      if @req.path_info =~ /color_guard/
+        flags_list
+      else
+        response = @app.call(env)
+        Thread.current[:color_guard_store] = nil
+        response
+      end
+
     end
 
     private
+
+    def flags_list
+      @all_features = ColorGuard.all
+      body = ERB.new(ALL_FEATURES_BODY).result(binding).to_s
+      ['200', { 'Content-Type' => 'text/html' }, [ body ] ]
+    end
 
     def store(request)
       if with_params? || with_cookies?

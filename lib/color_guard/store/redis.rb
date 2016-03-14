@@ -16,6 +16,17 @@ module ColorGuard
         end
       end
 
+      def all
+        features = {}
+        connection_pool.with do |redis|
+          keys = redis.keys
+          keys.each do |key|
+            features[key.to_sym] = redis.get(key)
+          end
+        end
+        features
+      end
+
       def write!(feature)
         connection_pool.with do |redis|
           redis.set(feature.name, feature.serialize)
