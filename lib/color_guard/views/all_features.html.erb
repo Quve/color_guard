@@ -1,14 +1,66 @@
 <h2>URL flags</h2>
-<% @all_features[0].each do |key, value| %>
-  <h3><%= key %> | <%= value %></h3>
-<% end %>
+<code>
+  URL flags can be set by adding parameters to the URL with the 'color_guard_' prefix: <br />
+  <strong>?color_guard_party=true&amp;color_guard_lame_stuff=false</strong>
+</code>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Percentage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_features[0].each do |key, value| %>
+      <tr>
+        <td><%= key %></td>
+        <td><%= value.percentage %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <h2>Cookie flags</h2>
-<% @all_features[1].each do |key, value| %>
-  <h3><%= key %> | <%= value %></h3>
-<% end %>
+<code>
+  Cookie flags can be set by entering in the terminal: <br />
+  <strong>document.cookie = 'color_guard.beta=100|'</strong>
+</code>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Percentage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_features[1].each do |key, value| %>
+      <tr>
+        <td><%= key %></td>
+        <td><%= value.percentage %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <h2>Redis flags</h2>
-<% @all_features[2].each do |key, value| %>
-  <h3><%= key %> | <%= value %></h3>
-<% end %>
+<code>
+  Interface for feature flag setting in Redis coming soon.
+</code>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Percentage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_features[2].each do |key, value| %>
+      <tr>
+        <td><%= key %></td>
+        <td><%= value.percentage %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
