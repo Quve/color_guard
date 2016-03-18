@@ -4,11 +4,6 @@ require "erb"
 
 module ColorGuard
   class Middleware
-    ALL_FEATURES_BODY = <<-EOS
-      <p><%= @all_features %></p>
-      <h3>Hello?</h3>
-    EOS
-
     attr_reader :config
 
     def initialize(app, config = {})
@@ -34,7 +29,8 @@ module ColorGuard
 
     def flags_list
       @all_features = ColorGuard.all
-      body = ERB.new(ALL_FEATURES_BODY).result(binding).to_s
+      view = File.read(File.expand_path("../views/all_features.html.erb", __FILE__))
+      body = ERB.new(view).result(binding).to_s
       ['200', { 'Content-Type' => 'text/html' }, [ body ] ]
     end
 

@@ -1,0 +1,14 @@
+<h2>URL flags</h2>
+<% @all_features[0].each do |key, value| %>
+  <h3><%= key %> | <%= value %></h3>
+<% end %>
+
+<h2>Cookie flags</h2>
+<% @all_features[1].each do |key, value| %>
+  <h3><%= key %> | <%= value %></h3>
+<% end %>
+
+<h2>Redis flags</h2>
+<% @all_features[2].each do |key, value| %>
+  <h3><%= key %> | <%= value %></h3>
+<% end %>
