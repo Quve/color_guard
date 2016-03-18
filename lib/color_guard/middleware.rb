@@ -37,6 +37,8 @@ module ColorGuard
 
     def write_feature
       feature = Feature.new(@req.params["feature_name"])
+      percentage = @req.params["feature_percentage"]
+      feature.percentage = percentage.empty? ? 100 : percentage
       store(@req).write!(feature)
       flags_list
     end
