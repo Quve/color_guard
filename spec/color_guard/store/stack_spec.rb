@@ -1,8 +1,8 @@
 require "color_guard"
 
 RSpec.describe ColorGuard::Store::Stack do
-  let(:first_store) { double("Store", find: nil, write!: false) }
-  let(:second_store) { double("Another Store", find: nil, write!: false) }
+  let(:first_store) { double("Store", find: nil, write!: false, all: nil) }
+  let(:second_store) { double("Another Store", find: nil, write!: false, all: nil) }
   let(:feature) { double(ColorGuard::Feature, name: "a_feature") }
 
   subject do
@@ -75,6 +75,15 @@ RSpec.describe ColorGuard::Store::Stack do
       it "returns false" do
         expect(subject.write!(feature)).to eq(false)
       end
+    end
+  end
+
+  describe 'all' do
+    it "calls all the stores" do
+      expect(first_store).to receive(:all)
+      expect(second_store).to receive(:all)
+
+      subject.all
     end
   end
 end
