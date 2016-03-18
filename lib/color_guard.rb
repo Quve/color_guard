@@ -15,6 +15,20 @@ module ColorGuard
       feature && feature.active?(user)
     end
 
+    def activate!(feature_name)
+      store.find(feature_name).tap do |feature|
+        feature.percentage = 100
+        store.write!(feature)
+      end
+    end
+
+    def deactivate!(feature_name)
+      store.find(feature_name).tap do |feature|
+        feature.percentage = 0
+        store.write!(feature)
+      end
+    end
+
     def store
       Thread.current[:color_guard_store] ||= Store.build(configuration)
     end
