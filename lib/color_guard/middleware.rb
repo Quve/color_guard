@@ -15,14 +15,15 @@ module ColorGuard
       @req = Rack::Request.new(env)
       Thread.current[:color_guard_store] = store(@req)
 
-      if @req.path_info =~ /color_guard/
+      if @req.path_info =~ /color_guard\/write_feature/
+        write_feature
+      elsif @req.path_info =~ /color_guard/
         flags_list
       else
         response = @app.call(env)
         Thread.current[:color_guard_store] = nil
         response
       end
-
     end
 
     private
@@ -32,6 +33,12 @@ module ColorGuard
       view = File.read(File.expand_path("../views/all_features.html.erb", __FILE__))
       body = ERB.new(view).result(binding).to_s
       ['200', { 'Content-Type' => 'text/html' }, [ body ] ]
+    end
+
+    def write_feature
+      feature = Feature.new(@req.params["feature_name"])
+      store(@req).write!(feature)
+      flags_list
     end
 
     def store(request)

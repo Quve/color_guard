@@ -21,7 +21,7 @@ module ColorGuard
         connection_pool.with do |redis|
           keys = redis.keys
           keys.each do |key|
-            features[key.to_sym] = redis.get(key)
+            features[key.to_sym] = Feature.new(key, redis.get(key))
           end
         end
         features
