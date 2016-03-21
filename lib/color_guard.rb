@@ -29,6 +29,10 @@ module ColorGuard
       end
     end
 
+    def all
+      store.all
+    end
+
     def store
       Thread.current[:color_guard_store] ||= Store.build(configuration)
     end

@@ -9,6 +9,10 @@ module ColorGuard
         @values[feature_name.to_sym]
       end
 
+      def all
+        @values
+      end
+
       def write!(feature)
         false
       end
